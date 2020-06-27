@@ -100,7 +100,7 @@ public:
         THROW_IF_FAILED(SCREEN_INFORMATION::CreateInstance(coordWindowSize,
                                                            *m_pFontInfo,
                                                            coordScreenBufferSize,
-                                                           gci.GetDefaultAttributes(),
+                                                           TextAttribute{},
                                                            TextAttribute{ FOREGROUND_BLUE | FOREGROUND_INTENSITY | BACKGROUND_RED },
                                                            uiCursorSize,
                                                            &gci.pCurrentScreenBuffer));
