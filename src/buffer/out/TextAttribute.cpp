@@ -16,7 +16,7 @@ WORD TextAttribute::GetLegacyAttributes(const WORD defaultAttributes) const noex
     const BYTE fgIndex = _foreground.GetLegacyIndex(defaultAttributes & FG_ATTRS);
     const BYTE bgIndex = _background.GetLegacyIndex((defaultAttributes & BG_ATTRS) >> 4);
     const WORD metaAttrs = _wAttrLegacy & META_ATTRS;
-    const bool brighten = _foreground.IsIndex16() && IsBold();
+    const bool brighten = IsBold() && _foreground.CanBeBrightened();
     return fgIndex | (bgIndex << 4) | metaAttrs | (brighten ? FOREGROUND_INTENSITY : 0);
 }
 
@@ -73,6 +73,26 @@ COLORREF TextAttribute::_GetRgbBackground(std::basic_string_view<COLORREF> color
                                           COLORREF defaultColor) const noexcept
 {
     return _background.GetColor(colorTable, defaultColor, false);
+}
+
+TextColor TextAttribute::GetForeground() const noexcept
+{
+    return _foreground;
+}
+
+TextColor TextAttribute::GetBackground() const noexcept
+{
+    return _background;
+}
+
+void TextAttribute::SetForeground(const TextColor foreground) noexcept
+{
+    _foreground = foreground;
+}
+
+void TextAttribute::SetBackground(const TextColor background) noexcept
+{
+    _background = background;
 }
 
 void TextAttribute::SetForeground(const COLORREF rgbForeground) noexcept
