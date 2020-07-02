@@ -2,7 +2,6 @@
 
 This repository contains the source code for:
 
-* [Windows Terminal](https://aka.ms/terminal)
 * [Windows Terminal Preview](https://aka.ms/terminal-preview)
 * The Windows console host (`conhost.exe`)
 * Components shared between the two projects
